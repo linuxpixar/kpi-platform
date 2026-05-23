@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}{% block title %}Tuzilma{% endblock %}{% block bc %}🏛 <strong>Tashkiliy tuzilma</strong>{% endblock %}
+{% block content %}
+<div class="ph"><div><h1>🏛 Tashkiliy tuzilma</h1><p>Fakultetlar, kafedralar, guruhlar, bo'limlar</p></div></div>
+{% for f in fakultetlar %}
+<div class="card">
+  <div class="ct">🏫 {{ f.nomi }}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+    <div><div style="font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;margin-bottom:.5rem">Kafedralar</div>
+    {% for k in f.kafedralar.all %}<div style="padding:7px 10px;border:1px solid var(--br);border-radius:6px;margin-bottom:5px;font-size:14px">🎓 {{ k.nomi }} <span style="color:var(--mu);font-size:12px">({{ k.oqituvchilar.count }} o'qituvchi, kerakli: {{ k.kerakli_sert }})</span></div>{% empty %}<div style="color:var(--mu);font-size:13px">Kafedra yo'q</div>{% endfor %}</div>
+    <div><div style="font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;margin-bottom:.5rem">Guruhlar</div>
+    {% for g in f.guruhlar.all %}<div style="padding:7px 10px;border:1px solid var(--br);border-radius:6px;margin-bottom:5px;font-size:14px">📚 {{ g.nomi }} <span style="color:var(--mu);font-size:12px">({{ g.talabalar.count }} talaba, kerakli: {{ g.kerakli_sert }})</span></div>{% empty %}<div style="color:var(--mu);font-size:13px">Guruh yo'q</div>{% endfor %}</div>
+  </div>
+</div>{% endfor %}
+<div class="card"><div class="ct">🏢 Bo'limlar</div>
+{% for b in bolimlar %}<div style="padding:8px 12px;border:1px solid var(--br);border-radius:6px;margin-bottom:6px;display:flex;align-items:center;gap:12px">
+  <strong>{{ b.nomi }}</strong><span style="color:var(--mu);font-size:13px">{{ b.xodimlar.count }} xodim · Kerakli: {{ b.kerakli_sert }} ta</span></div>{% empty %}<div style="color:var(--mu)">Bo'lim yo'q</div>{% endfor %}
+</div>{% endblock %}

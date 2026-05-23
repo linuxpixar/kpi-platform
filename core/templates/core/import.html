@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}{% block title %}Excel Import{% endblock %}{% block bc %}📥 <strong>Excel import</strong>{% endblock %}
+{% block content %}
+<div class="ph"><div><h1>📥 Excel orqali ma'lumot yuklash</h1><p>Talabalar, xodimlar, o'qituvchilar va foydalanuvchilarni Excel dan yuklang</p></div></div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+
+<div class="card"><div class="ct">📚 Talabalar yuklash</div>
+  <a href="{% url 'shablon' 'talabalar' %}" class="btn bo bsm" style="margin-bottom:1rem;display:inline-flex">⬇ Shablon yuklab olish</a>
+  <form method="post" action="{% url 'import_talabalar' %}" enctype="multipart/form-data">{% csrf_token %}
+    <div class="fg"><label>Guruh *</label><select name="guruh" required><option value="">— Tanlang —</option>{% for g in guruhlar %}<option value="{{ g.pk }}">{{ g.nomi }} ({{ g.fakultet.nomi }})</option>{% endfor %}</select></div>
+    <div class="fg"><label>Excel fayl (.xlsx) *</label><input type="file" name="file" accept=".xlsx,.xls" required></div>
+    <button type="submit" class="btn bb">📤 Yuklash</button>
+  </form></div>
+
+<div class="card"><div class="ct">🏢 Xodimlar yuklash</div>
+  <a href="{% url 'shablon' 'xodimlar' %}" class="btn bo bsm" style="margin-bottom:1rem;display:inline-flex">⬇ Shablon yuklab olish</a>
+  <form method="post" action="{% url 'import_xodimlar' %}" enctype="multipart/form-data">{% csrf_token %}
+    <div class="fg"><label>Bo'lim *</label><select name="bolim" required><option value="">— Tanlang —</option>{% for b in bolimlar %}<option value="{{ b.pk }}">{{ b.nomi }}</option>{% endfor %}</select></div>
+    <div class="fg"><label>Excel fayl (.xlsx) *</label><input type="file" name="file" accept=".xlsx,.xls" required></div>
+    <button type="submit" class="btn bb">📤 Yuklash</button>
+  </form></div>
+
+<div class="card"><div class="ct">🎓 O'qituvchilar yuklash</div>
+  <a href="{% url 'shablon' 'oqituvchilar' %}" class="btn bo bsm" style="margin-bottom:1rem;display:inline-flex">⬇ Shablon yuklab olish</a>
+  <form method="post" action="{% url 'import_oqituvchilar' %}" enctype="multipart/form-data">{% csrf_token %}
+    <div class="fg"><label>Kafedra *</label><select name="kafedra" required><option value="">— Tanlang —</option>{% for k in kafedralar %}<option value="{{ k.pk }}">{{ k.nomi }}</option>{% endfor %}</select></div>
+    <div class="fg"><label>Excel fayl (.xlsx) *</label><input type="file" name="file" accept=".xlsx,.xls" required></div>
+    <button type="submit" class="btn bb">📤 Yuklash</button>
+  </form></div>
+
+<div class="card"><div class="ct">👥 Foydalanuvchilar yuklash</div>
+  <a href="{% url 'shablon' 'users' %}" class="btn bo bsm" style="margin-bottom:1rem;display:inline-flex">⬇ Shablon yuklab olish</a>
+  <div class="notice nyl" style="font-size:13px;margin-bottom:1rem">
+    <strong>Ustunlar:</strong> Login | Parol | Ism | Familiya | Rol | Birikma<br>
+    <strong>Rol qiymatlari:</strong> tyutor | bolim_boshlig | kafedra_mudiri
+  </div>
+  <form method="post" action="{% url 'import_users' %}" enctype="multipart/form-data">{% csrf_token %}
+    <div class="fg"><label>Excel fayl (.xlsx) *</label><input type="file" name="file" accept=".xlsx,.xls" required></div>
+    <button type="submit" class="btn bb">📤 Yuklash</button>
+  </form></div>
+
+</div>{% endblock %}

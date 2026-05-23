@@ -1,0 +1,6 @@
+django>=6.0
+gunicorn
+whitenoise
+psycopg2-binary
+openpyxl
+dj-database-url

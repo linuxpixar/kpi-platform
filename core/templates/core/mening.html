@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% block title %}Mening sertifikatlarim{% endblock %}
+{% block breadcrumb %}🏆 <strong>Mening sertifikatlarim</strong>{% endblock %}
+{% block content %}
+<div class="ph" style="display:flex;align-items:center;justify-content:space-between">
+  <div><h1>🏆 Mening sertifikatlarim</h1><p>Siz yuklagan sertifikatlar ro'yxati</p></div>
+  <a href="{% url 'yuklash' %}" class="btn btn-blue">+ Yangi yuklash</a>
+</div>
+<div class="card" style="padding:1.25rem">
+  {% if sertifikatlar %}
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Sertifikat nomi</th><th>Tur</th><th>Fakultet</th><th>Bo'lim / Guruh</th><th>Tashkilot</th><th>Sana</th><th>Link</th><th></th></tr></thead>
+      <tbody>
+        {% for s in sertifikatlar %}
+        <tr>
+          <td style="color:var(--muted);font-size:13px">{{ forloop.counter }}</td>
+          <td><strong>{{ s.nomi }}</strong></td>
+          <td>
+            {% if s.tur == 'ustoz' %}<span class="badge b-blue">O'qituvchi</span>
+            {% elif s.tur == 'xodim' %}<span class="badge b-green">Xodim</span>
+            {% else %}<span class="badge b-amber">Talaba</span>{% endif %}
+          </td>
+          <td style="font-size:13px">{{ s.get_fakultet_display }}</td>
+          <td style="font-size:13px">{{ s.bolim }}</td>
+          <td style="font-size:13px">{{ s.tashkilot|default:"—" }}</td>
+          <td style="font-size:13px;color:var(--muted)">{{ s.berilgan|default:s.yaratilgan|date:"d.m.Y" }}</td>
+          <td><a href="{{ s.link }}" target="_blank" style="font-size:13px">🔗 Ko'rish</a></td>
+          <td>
+            <form method="post" action="{% url 'ochirish' s.pk %}" style="display:inline" onsubmit="return confirm(\"O'chirishni tasdiqlaysizmi?\")">
+              {% csrf_token %}<button type="submit" class="btn btn-red btn-sm">🗑</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty">
+    <div class="empty-icon">📭</div>
+    <p>Siz hali sertifikat yuklamagansiz.<br><a href="{% url 'yuklash' %}">Sertifikat yuklash →</a></p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

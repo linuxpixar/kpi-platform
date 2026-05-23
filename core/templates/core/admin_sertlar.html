@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}{% block title %}Sertifikatlar{% endblock %}{% block bc %}📄 <strong>Barcha sertifikatlar</strong> ({{ jami }} ta){% endblock %}
+{% block content %}
+<div class="ph"><div><h1>📄 Barcha sertifikatlar</h1><p>{{ jami }} ta</p></div><a href="?{% if q %}q={{ q }}&{% endif %}tur={{ tur }}&export=csv" class="btn bg2">⬇ Excel</a></div>
+<div class="card" style="padding:1rem">
+  <form method="get" style="display:flex;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap">
+    <input type="text" name="q" value="{{ q }}" placeholder="🔍 F.I.O. yoki sertifikat nomi..." style="flex:1;min-width:200px;padding:8px 12px;border:1.5px solid var(--br);border-radius:8px;font-size:14px;font-family:inherit;outline:none">
+    <select name="tur" style="padding:8px 12px;border:1.5px solid var(--br);border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:#fff">
+      <option value="">Barcha tur</option><option value="talaba" {% if tur == 'talaba' %}selected{% endif %}>Talaba</option>
+      <option value="xodim" {% if tur == 'xodim' %}selected{% endif %}>Xodim</option>
+      <option value="oqituvchi" {% if tur == 'oqituvchi' %}selected{% endif %}>O'qituvchi</option>
+    </select>
+    <button type="submit" class="btn bb bsm">Qidirish</button><a href="{% url 'admin_sertlar' %}" class="btn bo bsm">Tozalash</a>
+  </form>
+  {% if sertlar %}<div class="tw"><table>
+  <thead><tr><th>#</th><th>F.I.O.</th><th>Tur</th><th>Bo'lim/Guruh</th><th>Sertifikat nomi</th><th>Sana</th><th>Link</th></tr></thead>
+  <tbody>{% for s in sertlar %}<tr>
+    <td style="color:var(--mu);font-size:13px">{{ forloop.counter }}</td><td><strong>{{ s.egasi_fio }}</strong></td>
+    <td><span class="bdg {% if s.talaba %}bb2{% elif s.xodim %}bg3{% else %}bam{% endif %}">{{ s.egasi_tur }}</span></td>
+    <td style="font-size:13px">{{ s.egasi_bolim }}</td><td>{{ s.nomi }}</td>
+    <td style="font-size:13px;color:var(--mu)">{{ s.berilgan|default:s.yaratilgan|date:"d.m.Y" }}</td>
+    <td><a href="{{ s.link }}" target="_blank" style="font-size:13px">🔗</a></td>
+  </tr>{% endfor %}</tbody></table></div>
+  {% else %}<div class="empt"><div class="ei">🔍</div><p>Natija topilmadi</p></div>{% endif %}
+</div>{% endblock %}

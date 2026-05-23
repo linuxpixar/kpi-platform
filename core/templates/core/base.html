@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="uz"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}KPI{% endblock %} — NDCTI</title>
+<style>
+:root{--bl:#1e5fa8;--bl2:#174d8f;--bll:#e8f0fb;--gr:#27ae60;--grl:#eafaf1;--rd:#e74c3c;--rdl:#fdf2f2;--am:#f39c12;--aml:#fef9e7;--bg:#f0f2f5;--cd:#fff;--br:#e0e6ed;--tx:#1a2332;--mu:#6b7a8d}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html,body{height:100%;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;color:var(--tx);background:var(--bg)}a{color:var(--bl);text-decoration:none}a:hover{text-decoration:underline}
+.app{display:flex;height:100vh;overflow:hidden}
+.sb{width:230px;background:var(--bl);color:#fff;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sb-logo{padding:1.1rem 1rem;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:8px}
+.sb-logo-i{font-size:22px}.sb-logo-t{font-size:15px;font-weight:700;line-height:1.2}
+.sb-logo-t small{display:block;font-size:10px;font-weight:400;opacity:.5;letter-spacing:.04em}
+.sb-s{padding:.85rem .75rem .25rem}.sb-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.4;padding:0 8px;margin-bottom:5px}
+.sb-a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:13.5px;color:rgba(255,255,255,.82);transition:all .15s;margin-bottom:2px;text-decoration:none}
+.sb-a:hover{background:rgba(255,255,255,.12);color:#fff;text-decoration:none}.sb-a.on{background:rgba(255,255,255,.2);color:#fff;font-weight:600}
+.sb-ic{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+.sb-bot{margin-top:auto;padding:.85rem;border-top:1px solid rgba(255,255,255,.1)}
+.sb-u{background:rgba(255,255,255,.1);border-radius:8px;padding:9px;margin-bottom:7px}
+.sb-ur{display:flex;align-items:center;gap:8px}.sb-av{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+.sb-un{font-size:13px;font-weight:600}.sb-rol{font-size:11px;opacity:.55;margin-top:2px}
+.sb-bolim{font-size:11px;opacity:.65;margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.1);line-height:1.4}
+.sb-out{display:block;padding:7px;border-radius:7px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:13px;text-align:center;text-decoration:none}
+.sb-out:hover{background:rgba(255,255,255,.2);color:#fff;text-decoration:none}
+.mw{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.tb{background:#fff;border-bottom:1px solid var(--br);height:50px;display:flex;align-items:center;padding:0 1.5rem;flex-shrink:0;font-size:14px;color:var(--mu);gap:5px}
+.tb strong{color:var(--tx)}.mn{flex:1;overflow-y:auto;padding:1.5rem}
+.card{background:var(--cd);border-radius:10px;border:1px solid var(--br);padding:1.4rem;margin-bottom:1.2rem}
+.ct{font-size:15px;font-weight:700;margin-bottom:1.1rem;padding-bottom:.8rem;border-bottom:1px solid var(--br)}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:.875rem;margin-bottom:1.2rem}
+.sc{background:var(--cd);border:1px solid var(--br);border-radius:10px;padding:1rem 1.2rem}
+.sl{font-size:11px;color:var(--mu);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.sn{font-size:27px;font-weight:700;color:var(--bl);line-height:1}.ss{font-size:12px;color:var(--mu);margin-top:3px}
+.ph{margin-bottom:1.4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.7rem}
+.ph h1{font-size:20px;font-weight:700;margin-bottom:3px}.ph p{color:var(--mu);font-size:14px}
+.msgs{margin-bottom:.875rem}
+.msg{padding:10px 13px;border-radius:8px;font-size:14px;margin-bottom:7px}
+.mok{background:var(--grl);color:#1a6e3c;border:1px solid #a8e6c3}.merr{background:var(--rdl);color:var(--rd);border:1px solid #f5b8b8}
+.fg{margin-bottom:.875rem}.fg label{display:block;font-size:11px;font-weight:700;color:var(--mu);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.fg input,.fg select,.fg textarea{width:100%;padding:9px 12px;border:1.5px solid var(--br);border-radius:8px;font-size:14.5px;font-family:inherit;color:var(--tx);background:#fff;outline:none;transition:border-color .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--bl)}
+.fg .fe{color:var(--rd);font-size:12px;margin-top:3px}.fg .fh{color:var(--mu);font-size:12px;margin-top:3px}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.875rem}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 17px;border-radius:8px;border:none;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .17s;text-decoration:none;white-space:nowrap}
+.btn:hover{text-decoration:none}.bb{background:var(--bl);color:#fff}.bb:hover{background:var(--bl2);color:#fff}
+.bo{background:#fff;border:1.5px solid var(--br);color:var(--tx)}.bo:hover{border-color:var(--bl);color:var(--bl)}
+.br2{background:var(--rd);color:#fff}.br2:hover{background:#c0392b;color:#fff}
+.bg2{background:var(--gr);color:#fff}.bg2:hover{background:#219a52;color:#fff}
+.bsm{padding:5px 12px;font-size:13px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}thead tr{background:var(--bg)}
+th{padding:9px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--mu);white-space:nowrap;border-bottom:1px solid var(--br)}
+td{padding:10px 12px;border-bottom:1px solid var(--br);vertical-align:middle}tr:last-child td{border-bottom:none}tbody tr:hover td{background:#f7f9fc}
+.bdg{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap}
+.bb2{background:var(--bll);color:var(--bl)}.bg3{background:var(--grl);color:#1a6e3c}.bam{background:var(--aml);color:#7a4f00}.brd{background:var(--rdl);color:var(--rd)}
+.empt{text-align:center;padding:2.5rem;color:var(--mu)}.ei{font-size:42px;margin-bottom:.7rem}
+.notice{border-radius:8px;padding:11px 15px;font-size:14px;margin-bottom:.875rem}
+.nbl{background:var(--bll);color:var(--bl)}.ngr{background:var(--grl);color:#1a6e3c}.nyl{background:#fff8e1;color:#7a5c00}
+/* KPI bar */
+.kbar{height:8px;background:var(--br);border-radius:4px;overflow:hidden;min-width:80px}
+.kfill{height:100%;border-radius:4px;transition:width .3s}
+.k-gr{background:var(--gr)}.k-am{background:var(--am)}.k-rd{background:var(--rd)}
+</style></head><body>
+<div class="app">
+<aside class="sb">
+  <div class="sb-logo"><div class="sb-logo-i">📊</div><div class="sb-logo-t">KPI Tizimi<small>Is'hoqxon Ibrat NDCTI</small></div></div>
+  <div class="sb-s">
+    <div class="sb-l">Menyu</div>
+    <a href="{% url 'dashboard' %}" class="sb-a {% if request.resolver_match.url_name == 'dashboard' %}on{% endif %}"><span class="sb-ic">🏠</span> Bosh sahifa</a>
+    <a href="{% url 'royxat' %}" class="sb-a {% if request.resolver_match.url_name == 'royxat' or request.resolver_match.url_name == 'sert_yuklash' %}on{% endif %}"><span class="sb-ic">📋</span> Ro'yxat & sertifikat</a>
+    <a href="{% url 'kpi' %}" class="sb-a {% if request.resolver_match.url_name == 'kpi' %}on{% endif %}"><span class="sb-ic">📈</span> KPI hisobot</a>
+  </div>
+  {% if request.user.is_staff %}
+  <div class="sb-s">
+    <div class="sb-l">Admin</div>
+    <a href="{% url 'import_page' %}" class="sb-a {% if 'import' in request.resolver_match.url_name %}on{% endif %}"><span class="sb-ic">📥</span> Excel import</a>
+    <a href="{% url 'users_list' %}" class="sb-a {% if 'user' in request.resolver_match.url_name %}on{% endif %}"><span class="sb-ic">👥</span> Foydalanuvchilar</a>
+    <a href="{% url 'tuzilma' %}" class="sb-a {% if request.resolver_match.url_name == 'tuzilma' %}on{% endif %}"><span class="sb-ic">🏛</span> Tuzilma</a>
+    <a href="{% url 'admin_sertlar' %}" class="sb-a {% if request.resolver_match.url_name == 'admin_sertlar' %}on{% endif %}"><span class="sb-ic">📄</span> Barcha sertifikatlar</a>
+    <a href="/django-admin/" class="sb-a" target="_blank"><span class="sb-ic">⚙️</span> Django admin</a>
+  </div>
+  {% endif %}
+  <div class="sb-bot">
+    <div class="sb-u">
+      <div class="sb-ur"><div class="sb-av">{{ request.user.username|first|upper }}</div>
+      <div><div class="sb-un">{{ request.user.get_full_name|default:request.user.username }}</div>
+      <div class="sb-rol">{% if request.user.is_staff %}Admin{% elif request.user.profile %}{{ request.user.profile.get_rol_display }}{% endif %}</div></div></div>
+      {% if request.user.profile %}
+      <div class="sb-bolim">
+        {% with p=request.user.profile %}
+        {% if p.guruh %}📚 {{ p.guruh.nomi }}
+        {% elif p.bolim %}🏢 {{ p.bolim.nomi }}
+        {% elif p.kafedra %}🎓 {{ p.kafedra.nomi }}{% endif %}
+        {% endwith %}
+      </div>{% endif %}
+    </div>
+    <a href="{% url 'logout' %}" class="sb-out">↩ Chiqish</a>
+  </div>
+</aside>
+<div class="mw">
+  <div class="tb">{% block bc %}<strong>Bosh sahifa</strong>{% endblock %}</div>
+  <div class="mn">
+    {% if messages %}<div class="msgs">{% for m in messages %}<div class="msg {% if m.tags == 'success' %}mok{% else %}merr{% endif %}">{{ m }}</div>{% endfor %}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</div></div></body></html>

@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}{% block title %}KPI{% endblock %}{% block bc %}📈 <strong>KPI hisobot</strong>{% endblock %}
+{% block content %}
+<div class="ph">
+  <div><h1>📈 KPI hisobot</h1><p>Sertifikat to'ldirish ko'rsatkichlari</p></div>
+  <a href="?{% if request.GET.guruh %}guruh={{ request.GET.guruh }}&{% endif %}{% if request.GET.bolim %}bolim={{ request.GET.bolim }}&{% endif %}{% if request.GET.kafedra %}kafedra={{ request.GET.kafedra }}&{% endif %}export=kpi" class="btn bg2">⬇ Excel yuklab olish</a>
+</div>
+
+{% if guruhlar and not guruh %}<div class="card">
+  <div class="ct">📚 Guruhni tanlang (Tyutorlar)</div>
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+  {% for g in guruhlar %}<a href="?guruh={{ g.pk }}" class="btn bo bsm">{{ g.nomi }} ({{ g.fakultet.nomi }})</a>{% endfor %}
+  </div></div>{% endif %}
+
+{% if guruh %}
+<div class="sr" style="grid-template-columns:repeat(3,1fr)">
+  <div class="sc"><div class="sl">Guruh</div><div class="sn" style="font-size:20px">{{ guruh.nomi }}</div><div class="ss">{{ guruh.fakultet.nomi }}</div></div>
+  <div class="sc"><div class="sl">Talabalar</div><div class="sn">{{ jami }}</div><div class="ss">Jami ro'yxatda</div></div>
+  <div class="sc"><div class="sl">O'rtacha KPI</div><div class="sn" style="{% if o_foiz >= 100 %}color:var(--gr){% elif o_foiz >= 50 %}color:var(--am){% else %}color:var(--rd){% endif %}">{{ o_foiz }}%</div><div class="ss">{{ yetarli }}/{{ jami }} yetarli</div></div>
+</div>
+<div class="card" style="padding:1rem"><div class="tw"><table>
+<thead><tr><th>#</th><th>F.I.O.</th><th>Sertifikat soni</th><th>Kerak</th><th>KPI foiz</th><th>Holat</th><th></th></tr></thead>
+<tbody>{% for t in talabalar %}<tr>
+  <td style="color:var(--mu);font-size:13px">{{ forloop.counter }}</td>
+  <td><strong>{{ t.obj.fio }}</strong></td>
+  <td><span class="bdg bb2">{{ t.soni }}</span></td>
+  <td style="color:var(--mu);font-size:13px">{{ t.kerak }}</td>
+  <td><div style="display:flex;align-items:center;gap:8px"><div class="kbar" style="width:100px"><div class="kfill {% if t.foiz >= 100 %}k-gr{% elif t.foiz >= 50 %}k-am{% else %}k-rd{% endif %}" style="width:{{ t.foiz }}%"></div></div><b>{{ t.foiz }}%</b></div></td>
+  <td>{% if t.foiz >= 100 %}<span class="bdg bg3">✓ Yetarli</span>{% elif t.foiz > 0 %}<span class="bdg bam">Jarayonda</span>{% else %}<span class="bdg brd">Boshlanmagan</span>{% endif %}</td>
+  <td><a href="{% url 'sert_yuklash' 'talaba' t.obj.pk %}" class="btn bb bsm">Ko'rish</a></td>
+</tr>{% endfor %}</tbody></table></div></div>
+<a href="{% url 'kpi' %}" class="btn bo bsm">← Orqaga</a>
+{% endif %}
+
+{% if bolimlar and not bolim %}<div class="card">
+  <div class="ct">🏢 Bo'limni tanlang (Xodimlar)</div>
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem">{% for b in bolimlar %}<a href="?bolim={{ b.pk }}" class="btn bo bsm">{{ b.nomi }}</a>{% endfor %}</div>
+</div>{% endif %}
+
+{% if bolim %}
+<div class="sr" style="grid-template-columns:repeat(3,1fr)">
+  <div class="sc"><div class="sl">Bo'lim</div><div class="sn" style="font-size:20px">{{ bolim.nomi }}</div></div>
+  <div class="sc"><div class="sl">Xodimlar</div><div class="sn">{{ jami_x }}</div></div>
+  <div class="sc"><div class="sl">O'rtacha KPI</div><div class="sn" style="{% if o_foiz_x >= 100 %}color:var(--gr){% elif o_foiz_x >= 50 %}color:var(--am){% else %}color:var(--rd){% endif %}">{{ o_foiz_x }}%</div><div class="ss">{{ yetarli_x }}/{{ jami_x }} yetarli</div></div>
+</div>
+<div class="card" style="padding:1rem"><div class="tw"><table>
+<thead><tr><th>#</th><th>F.I.O.</th><th>Sertifikat</th><th>Kerak</th><th>KPI</th><th>Holat</th><th></th></tr></thead>
+<tbody>{% for x in xodimlar %}<tr>
+  <td style="color:var(--mu);font-size:13px">{{ forloop.counter }}</td><td><strong>{{ x.obj.fio }}</strong></td>
+  <td><span class="bdg bb2">{{ x.soni }}</span></td><td style="color:var(--mu);font-size:13px">{{ x.kerak }}</td>
+  <td><div style="display:flex;align-items:center;gap:8px"><div class="kbar" style="width:100px"><div class="kfill {% if x.foiz >= 100 %}k-gr{% elif x.foiz >= 50 %}k-am{% else %}k-rd{% endif %}" style="width:{{ x.foiz }}%"></div></div><b>{{ x.foiz }}%</b></div></td>
+  <td>{% if x.foiz >= 100 %}<span class="bdg bg3">✓ Yetarli</span>{% elif x.foiz > 0 %}<span class="bdg bam">Jarayonda</span>{% else %}<span class="bdg brd">Boshlanmagan</span>{% endif %}</td>
+  <td><a href="{% url 'sert_yuklash' 'xodim' x.obj.pk %}" class="btn bb bsm">Ko'rish</a></td>
+</tr>{% endfor %}</tbody></table></div></div>
+<a href="{% url 'kpi' %}" class="btn bo bsm">← Orqaga</a>
+{% endif %}
+
+{% if kafedralar and not kafedra %}<div class="card">
+  <div class="ct">🎓 Kafedrni tanlang (O'qituvchilar)</div>
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem">{% for k in kafedralar %}<a href="?kafedra={{ k.pk }}" class="btn bo bsm">{{ k.nomi }}</a>{% endfor %}</div>
+</div>{% endif %}
+
+{% if kafedra %}
+<div class="sr" style="grid-template-columns:repeat(3,1fr)">
+  <div class="sc"><div class="sl">Kafedra</div><div class="sn" style="font-size:18px">{{ kafedra.nomi }}</div></div>
+  <div class="sc"><div class="sl">O'qituvchilar</div><div class="sn">{{ jami_o }}</div></div>
+  <div class="sc"><div class="sl">O'rtacha KPI</div><div class="sn" style="{% if o_foiz_o >= 100 %}color:var(--gr){% elif o_foiz_o >= 50 %}color:var(--am){% else %}color:var(--rd){% endif %}">{{ o_foiz_o }}%</div><div class="ss">{{ yetarli_o }}/{{ jami_o }} yetarli</div></div>
+</div>
+<div class="card" style="padding:1rem"><div class="tw"><table>
+<thead><tr><th>#</th><th>F.I.O.</th><th>Sertifikat</th><th>Kerak</th><th>KPI</th><th>Holat</th><th></th></tr></thead>
+<tbody>{% for o in oqituvchilar %}<tr>
+  <td style="color:var(--mu);font-size:13px">{{ forloop.counter }}</td><td><strong>{{ o.obj.fio }}</strong></td>
+  <td><span class="bdg bb2">{{ o.soni }}</span></td><td style="color:var(--mu);font-size:13px">{{ o.kerak }}</td>
+  <td><div style="display:flex;align-items:center;gap:8px"><div class="kbar" style="width:100px"><div class="kfill {% if o.foiz >= 100 %}k-gr{% elif o.foiz >= 50 %}k-am{% else %}k-rd{% endif %}" style="width:{{ o.foiz }}%"></div></div><b>{{ o.foiz }}%</b></div></td>
+  <td>{% if o.foiz >= 100 %}<span class="bdg bg3">✓ Yetarli</span>{% elif o.foiz > 0 %}<span class="bdg bam">Jarayonda</span>{% else %}<span class="bdg brd">Boshlanmagan</span>{% endif %}</td>
+  <td><a href="{% url 'sert_yuklash' 'oqituvchi' o.obj.pk %}" class="btn bb bsm">Ko'rish</a></td>
+</tr>{% endfor %}</tbody></table></div></div>
+<a href="{% url 'kpi' %}" class="btn bo bsm">← Orqaga</a>
+{% endif %}
+{% endblock %}

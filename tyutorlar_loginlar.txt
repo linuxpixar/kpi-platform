@@ -1,0 +1,88 @@
+TYUTORLAR LOGIN VA PAROLLARI
+==================================================
+
+F.I.Sh : Abdulxamidov Ulug'bek Abdulpatto o‘g‘li
+Login  : abdulxamidov_u
+Parol  : tyutor123
+Guruhlar: RUA-AR-24, XTA-AU-23, XTA-JU-25, RUS-AR-25, TM-AU-24, XTA-KU-25
+----------------------------------------
+F.I.Sh : Abdurazzaqov Jahongir Bahodir o‘gli
+Login  : abdurazzaqov_j
+Parol  : tyutor123
+Guruhlar: XTA-JU-24, RUS-CR-23, XTA-BU-23, XTA-EU-25, RUA-BR-24
+----------------------------------------
+F.I.Sh : Jo'rayev Azizbek Azimjonovich
+Login  : jorayev_a
+Parol  : tyutor123
+Guruhlar: XTA-HU-24, RUA-BR-23, GID-AU-23, RUA-CR-25, TNA-AU-25
+----------------------------------------
+F.I.Sh : Ergashboyev Nizomjon Numonjon o'g'li
+Login  : ergashboyev_n
+Parol  : tyutor123
+Guruhlar: TNA-AU-24, XTA-GU-24, XTA-BU-24, XTA-EU-23, RUA-AR-25
+----------------------------------------
+F.I.Sh : Mirg'aniyeva Muhabbat Ortiqboyevna
+Login  : mirganiyeva_m
+Parol  : tyutor123
+Guruhlar: XTA-AU-24, RUS-BR-23, XTA-IU-23, XTA-GU-25, XTA-HU-25
+----------------------------------------
+F.I.Sh : Xojiboyeva Muqaddas Xakimjonovna
+Login  : xojiboyeva_m
+Parol  : tyutor123
+Guruhlar: TNA-AU-23, XTA-EU-24, RUA-AR-23, RUS-BR-24, XTA-CR-25
+----------------------------------------
+F.I.Sh : Usmonova Dilorom Ne’matovna
+Login  : usmonova_d
+Parol  : tyutor123
+Guruhlar: MBX-AU-23, XTA-FU-23, XTA-FU-25, RUS-BR-25, TM-BU-24, XTA-AU-25
+----------------------------------------
+F.I.Sh : Jo'rayeva Sevara Xusniddin qizi
+Login  : jorayeva_s
+Parol  : tyutor123
+Guruhlar: XTA-CU-24, XTA-IU-24, RUS-DR-23, XTA-GU-23, XTA-DU-25
+----------------------------------------
+F.I.Sh : O‘rinova Dildora Abdurahmonovna
+Login  : orinova_d
+Parol  : tyutor123
+Guruhlar: XTA-FU-24, XTA-KU-24, XTA-HU-23, MBX-BU-23, RUA-DR-25
+----------------------------------------
+F.I.Sh : Usmonova Mohira Mahammadjon qizi
+Login  : usmonova_m
+Parol  : tyutor123
+Guruhlar: XTA-DU-24, RUS-AR-23, XTA-DU-23, XTA-BU-25, TM-AU-25
+----------------------------------------
+F.I.Sh : Nuritdinova Hurshida Nuritdinovna
+Login  : nuritdinova_h
+Parol  : tyutor123
+Guruhlar: XTA-CU-23, RUA-BR-25, XTA-JU-23, XTA-IU-25, RUS-AR-24
+----------------------------------------
+F.I.Sh : Boboxonova Dilshoda Oripxon qizi
+Login  : boboxonova_d
+Parol  : tyutor123
+Guruhlar: ENG-AU-25, ENG-BU-25, ENG-EU-25, ENG-CR-25, KLA-AU-23, KLA-AU-24, KLA-AU-25
+----------------------------------------
+F.I.Sh : G'ulomjonov G'ofurjon G'ulomjon o'g'li
+Login  : gulomjonov_g
+Parol  : tyutor123
+Guruhlar: ENG-AU-24, ENG-BU-24, ENG-CU-24, ENG-DU-24, ENG-EU-24, GER-AU-23
+----------------------------------------
+F.I.Sh : Yuldasheva Dilnoza Sharifjonovna
+Login  : yuldasheva_d
+Parol  : tyutor123
+Guruhlar: ENG-AU-23, ENG-DU-23, ENG-EU-23, JAP-AU-23, PER-AU-23, FAR-AU-23
+----------------------------------------
+F.I.Sh : Yuldosheva Oydinxon Baxromjonovna
+Login  : yuldosheva_o
+Parol  : tyutor123
+Guruhlar: KOR-AU-23, FRA-AU-23, GER-AU-24, KOR-AU-24, FRA-AU-24, KOR-AU-25, GER-AU-25
+----------------------------------------
+F.I.Sh : Boboyev Sodiqjon Isomiddinovich
+Login  : boboyev_s
+Parol  : tyutor123
+Guruhlar: ENG-GU-24, ENG-HR-23, ENG-CR-23, TNG-AU-23
+----------------------------------------
+F.I.Sh : Mutalibov Zuxriddin Goyibnazar o'g'li
+Login  : mutalibov_z
+Parol  : tyutor123
+Guruhlar: ENG-FU-25
+----------------------------------------

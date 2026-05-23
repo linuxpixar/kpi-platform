@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+{% block title %}Sertifikat yuklash{% endblock %}
+{% block breadcrumb %}📤 <strong>Sertifikat yuklash</strong>{% endblock %}
+{% block content %}
+<div class="ph">
+  <div class="ph-left">
+    <h1>📤 Sertifikat yuklash</h1>
+    <p>Sertifikat ma'lumotlarini kiriting</p>
+  </div>
+</div>
+
+{% if profile %}
+<div class="notice n-blue" style="margin-bottom:1.25rem">
+  <strong>Sizning bo'limingiz:</strong>
+  {{ profile.get_tur_display }} · {{ profile.get_fakultet_display }} · {{ profile.bolim }}
+  <br><small style="opacity:.75">Sertifikat avtomatik ushbu bo'lim uchun yuklanadi</small>
+</div>
+{% endif %}
+
+<div class="card" style="max-width:620px">
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    <div class="fgroup">
+      <label>To'liq F.I.O. *</label>
+      {{ form.fio }}
+      {% if form.fio.errors %}<div class="ferr">{{ form.fio.errors.0 }}</div>{% endif %}
+    </div>
+
+    {% if not profile %}
+    {# Faqat admin uchun - bo'lim tanlash #}
+    <div class="frow2">
+      <div class="fgroup">
+        <label>Tur *</label>
+        <select name="tur">
+          {% for val,lbl in tur_choices %}<option value="{{ val }}">{{ lbl }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="fgroup">
+        <label>Fakultet *</label>
+        <select name="fakultet">
+          {% for val,lbl in fak_choices %}<option value="{{ val }}">{{ lbl }}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="fgroup">
+      <label>Kafedra / Bo'lim *</label>
+      <input type="text" name="bolim" placeholder="Bo'lim nomini kiriting">
+    </div>
+    {% endif %}
+
+    <div class="fgroup">
+      <label>Sertifikat nomi *</label>
+      {{ form.nomi }}
+      {% if form.nomi.errors %}<div class="ferr">{{ form.nomi.errors.0 }}</div>{% endif %}
+    </div>
+
+    <div class="fgroup">
+      <label>Sertifikat linki *</label>
+      {{ form.link }}
+      {% if form.link.errors %}<div class="ferr">{{ form.link.errors.0 }}</div>{% endif %}
+      <div class="fhint">Masalan: https://coursera.org/verify/ABC123</div>
+    </div>
+
+    <div class="frow3">
+      <div class="fgroup">
+        <label>Bergan tashkilot</label>
+        {{ form.tashkilot }}
+      </div>
+      <div class="fgroup">
+        <label>Berilgan sana</label>
+        {{ form.berilgan }}
+      </div>
+      <div class="fgroup">
+        <label>Kurs (talabalar)</label>
+        {{ form.kurs }}
+      </div>
+    </div>
+
+    <div style="display:flex;gap:1rem;margin-top:.5rem">
+      <button type="submit" class="btn btn-blue">✅ Yuborish</button>
+      <a href="{% url 'dashboard' %}" class="btn btn-outline">Bekor qilish</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

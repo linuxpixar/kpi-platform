@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}{% block title %}Sertifikat{% endblock %}{% block bc %}📋 <a href="{% url 'royxat' %}">Ro'yxat</a> › <strong>{{ obj.fio }}</strong>{% endblock %}
+{% block content %}
+<div class="ph"><div><h1>{{ obj.fio }}</h1><p>Sertifikatlar: {{ sertlar.count }} ta</p></div><a href="{% url 'royxat' %}" class="btn bo">← Orqaga</a></div>
+<div class="card" style="max-width:560px">
+  <div class="ct">+ Yangi sertifikat qo'shish</div>
+  <form method="post">{% csrf_token %}
+    <div class="fg"><label>Sertifikat nomi *</label><input type="text" name="nomi" placeholder="Masalan: Python dasturlash kursi" required></div>
+    <div class="fg"><label>Sertifikat linki *</label><input type="url" name="link" placeholder="https://..." required></div>
+    <div class="fr2">
+      <div class="fg"><label>Bergan tashkilot</label><input type="text" name="tashkilot" placeholder="Coursera, IT-Park..."></div>
+      <div class="fg"><label>Berilgan sana</label><input type="date" name="berilgan"></div>
+    </div>
+    <button type="submit" class="btn bb">✅ Qo'shish</button>
+  </form>
+</div>
+<div class="card" style="padding:1rem">
+  <div class="ct">Mavjud sertifikatlar ({{ sertlar.count }} ta)</div>
+  {% if sertlar %}<div class="tw"><table>
+    <thead><tr><th>#</th><th>Nomi</th><th>Tashkilot</th><th>Sana</th><th>Link</th><th></th></tr></thead>
+    <tbody>{% for s in sertlar %}<tr>
+      <td style="color:var(--mu);font-size:13px">{{ forloop.counter }}</td>
+      <td><strong>{{ s.nomi }}</strong></td>
+      <td style="font-size:13px">{{ s.tashkilot|default:"—" }}</td>
+      <td style="font-size:13px;color:var(--mu)">{{ s.berilgan|default:"—" }}</td>
+      <td><a href="{{ s.link }}" target="_blank" style="font-size:13px">🔗 Ko'rish</a></td>
+      <td><form method="post" action="{% url 'sert_ochir' s.pk %}" style="display:inline" onsubmit="return confirm('O\'chirasizmi?')">{% csrf_token %}<button class="btn br2 bsm">🗑</button></form></td>
+    </tr>{% endfor %}</tbody></table></div>
+  {% else %}<div class="empt"><div class="ei">📭</div><p>Hali sertifikat yo'q</p></div>{% endif %}
+</div>{% endblock %}

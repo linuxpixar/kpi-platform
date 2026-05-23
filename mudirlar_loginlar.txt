@@ -1,0 +1,38 @@
+KAFEDRA MUDIRLARI LOGIN VA PAROLLARI
+==================================================
+
+F.I.Sh  : Amanov Akmal Aripjonovich
+Login   : amanov_a1
+Parol   : mudiri123
+Kafedra : Ingliz tili o'qitish metodikasi kafedrasi
+----------------------------------------
+F.I.Sh  : Tursunov Muxammadyusuf Alisher o'g'li
+Login   : tursunov_m1
+Parol   : mudiri123
+Kafedra : Ingliz tili va adabiyoti kafedrasi
+----------------------------------------
+F.I.Sh  : Tursunov Akmaljon Xamidjonovich
+Login   : tursunov_a1
+Parol   : mudiri123
+Kafedra : Nemis va fransuz tillari kafedrasi
+----------------------------------------
+F.I.Sh  : Abdurasulova Umida Sadullayevna
+Login   : abdurasulova_u1
+Parol   : mudiri123
+Kafedra : O'zbek va sharq tillari kafedrasi
+----------------------------------------
+F.I.Sh  : Gafarova Lola Salimbekovna
+Login   : gafarova_l1
+Parol   : mudiri123
+Kafedra : Rus filologiyasi kafedrasi
+----------------------------------------
+F.I.Sh  : Mirzaxalov Sardorbek Jamoliddinovich
+Login   : mirzaxalov_s1
+Parol   : mudiri123
+Kafedra : Gumanitar fanlar va jismoniy tarbiya kafedrasi
+----------------------------------------
+F.I.Sh  : Ermirzayev Abbos Vaxobjonovich
+Login   : ermirzayev_a1
+Parol   : mudiri123
+Kafedra : Turizm va tarjima kafedrasi
+----------------------------------------

@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}{% block title %}Yangi user{% endblock %}{% block bc %}👥 <a href="{% url 'users_list' %}">Foydalanuvchilar</a> › <strong>Yangi</strong>{% endblock %}
+{% block content %}
+<div class="ph"><div><h1>👤 Yangi foydalanuvchi</h1><p>Bo'lim uchun login yarating</p></div></div>
+<div class="card" style="max-width:540px">
+  {% if error %}<div class="msg merr">❌ {{ error }}</div>{% endif %}
+  <form method="post">{% csrf_token %}
+    <div class="fr2">
+      <div class="fg"><label>Ism *</label><input type="text" name="firstname" value="{{ post.firstname }}" placeholder="Ism"></div>
+      <div class="fg"><label>Familiya *</label><input type="text" name="lastname" value="{{ post.lastname }}" placeholder="Familiya"></div>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label>Login *</label><input type="text" name="username" value="{{ post.username }}" placeholder="karimov_a"><div class="fh">Bo'shliqsiz, faqat lotin</div></div>
+      <div class="fg"><label>Parol *</label><input type="text" name="password" value="{{ post.password }}" placeholder="parol123"></div>
+    </div>
+    <hr style="border:none;border-top:1px solid var(--br);margin:.875rem 0">
+    <div class="fg"><label>Rol *</label><select name="rol" id="rol" onchange="showBirikma()" required><option value="">— Tanlang —</option>{% for v,l in rol_choices %}<option value="{{ v }}" {% if post.rol == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select></div>
+    <div id="guruh-div" style="display:none" class="fg"><label>Guruhlar * <span style="font-weight:400;font-size:11px">(Ctrl bosib bir nechta tanlang)</span></label><select name="guruhlar" multiple size="5" style="height:auto"><option value="">— Tanlang —</option>{% for g in guruhlar %}<option value="{{ g.pk }}">{{ g.nomi }} ({{ g.fakultet.nomi }})</option>{% endfor %}</select><div class="fh">Bir yoki bir nechta guruh tanlash mumkin</div></div>
+    <div id="bolim-div" style="display:none" class="fg"><label>Bo'lim *</label><select name="bolim"><option value="">— Tanlang —</option>{% for b in bolimlar %}<option value="{{ b.pk }}" {% if post.bolim == b.pk|stringformat:'s' %}selected{% endif %}>{{ b.nomi }}</option>{% endfor %}</select></div>
+    <div id="kafedra-div" style="display:none" class="fg"><label>Kafedra *</label><select name="kafedra"><option value="">— Tanlang —</option>{% for k in kafedralar %}<option value="{{ k.pk }}" {% if post.kafedra == k.pk|stringformat:'s' %}selected{% endif %}>{{ k.nomi }}</option>{% endfor %}</select></div>
+    <div style="display:flex;gap:.875rem"><button type="submit" class="btn bb">✅ Yaratish</button><a href="{% url 'users_list' %}" class="btn bo">Bekor</a></div>
+  </form>
+</div>
+<script>
+function showBirikma(){
+  var r=document.getElementById('rol').value;
+  document.getElementById('guruh-div').style.display=r=='tyutor'?'block':'none';
+  document.getElementById('bolim-div').style.display=r=='bolim_boshlig'?'block':'none';
+  document.getElementById('kafedra-div').style.display=r=='kafedra_mudiri'?'block':'none';
+}
+showBirikma();
+</script>{% endblock %}

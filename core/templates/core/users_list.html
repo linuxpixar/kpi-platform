@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}{% block title %}Foydalanuvchilar{% endblock %}{% block bc %}👥 <strong>Foydalanuvchilar</strong>{% endblock %}
+{% block content %}
+<div class="ph"><div><h1>👥 Foydalanuvchilar</h1><p>Tizimga kiruvchi hodimlar</p></div><a href="{% url 'user_add' %}" class="btn bb">+ Yangi</a></div>
+<div class="card" style="padding:1rem">
+{% if users %}<div class="tw"><table>
+<thead><tr><th>#</th><th>F.I.O.</th><th>Login</th><th>Rol</th><th>Biriktirilgan</th><th></th></tr></thead>
+<tbody>{% for u in users %}<tr>
+  <td style="color:var(--mu);font-size:13px">{{ forloop.counter }}</td>
+  <td><strong>{{ u.get_full_name|default:u.username }}</strong></td>
+  <td style="font-family:monospace;font-size:13px">{{ u.username }}</td>
+  <td>{% if u.profile %}<span class="bdg {% if u.profile.rol == 'tyutor' %}bb2{% elif u.profile.rol == 'bolim_boshlig' %}bg3{% else %}bam{% endif %}">{{ u.profile.get_rol_display }}</span>{% else %}—{% endif %}</td>
+  <td style="font-size:13px">{% if u.profile %}{% if u.profile.guruh %}{{ u.profile.guruh.nomi }}{% elif u.profile.bolim %}{{ u.profile.bolim.nomi }}{% elif u.profile.kafedra %}{{ u.profile.kafedra.nomi }}{% else %}—{% endif %}{% else %}—{% endif %}</td>
+  <td><form method="post" action="{% url 'user_delete' u.pk %}" style="display:inline" onsubmit="return confirm('O\'chirasizmi?')">{% csrf_token %}<button class="btn br2 bsm">🗑</button></form></td>
+</tr>{% endfor %}</tbody></table></div>
+{% else %}<div class="empt"><div class="ei">👤</div><p>Foydalanuvchi yo'q. <a href="{% url 'user_add' %}">Qo'shish →</a></p></div>{% endif %}
+</div>{% endblock %}

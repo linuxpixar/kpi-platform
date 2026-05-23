@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}{% block title %}Bosh sahifa{% endblock %}{% block bc %}🏠 <strong>Bosh sahifa</strong>{% endblock %}
+{% block content %}
+<div class="ph"><div><h1>Bosh sahifa</h1><p>KPI va sertifikat tizimiga xush kelibsiz</p></div></div>
+<div class="sr">
+  <div class="sc"><div class="sl">Jami sertifikatlar</div><div class="sn">{{ jami_sert }}</div><div class="ss">Barchasi</div></div>
+  <div class="sc"><div class="sl">Bu oy</div><div class="sn">{{ bu_oy }}</div><div class="ss">Joriy oy</div></div>
+  {% if jami_talaba is not None %}<div class="sc"><div class="sl">Guruh talabalari</div><div class="sn">{{ jami_talaba }}</div><div class="ss">{{ profile.guruh.nomi }}</div></div><div class="sc"><div class="sl">KPI bajarildi</div><div class="sn" style="color:var(--gr)">{{ foiz }}%</div><div class="ss">{{ yetarli }}/{{ jami_talaba }} yetarli</div></div>{% endif %}
+  {% if jami_xodim is not None %}<div class="sc"><div class="sl">Bo'lim xodimlari</div><div class="sn">{{ jami_xodim }}</div><div class="ss">{{ profile.bolim.nomi }}</div></div><div class="sc"><div class="sl">KPI bajarildi</div><div class="sn" style="color:var(--gr)">{{ foiz }}%</div><div class="ss">{{ yetarli }}/{{ jami_xodim }} yetarli</div></div>{% endif %}
+  {% if jami_oqituvchi is not None %}<div class="sc"><div class="sl">Kafedra o'qituvchilari</div><div class="sn">{{ jami_oqituvchi }}</div><div class="ss">{{ profile.kafedra.nomi }}</div></div><div class="sc"><div class="sl">KPI bajarildi</div><div class="sn" style="color:var(--gr)">{{ foiz }}%</div><div class="ss">{{ yetarli }}/{{ jami_oqituvchi }} yetarli</div></div>{% endif %}
+</div>
+<div class="notice nbl">📢 <strong>Muhim:</strong> 2026-yil 1-chorak uchun sertifikatlar muddati — <strong>20-mart 2026</strong></div>
+<div class="card">
+  <div class="ct">🕐 So'nggi yuklangan sertifikatlar</div>
+  {% if oxirgilar %}<div class="tw"><table><thead><tr><th>F.I.O.</th><th>Tur</th><th>Sertifikat nomi</th><th>Sana</th></tr></thead>
+  <tbody>{% for s in oxirgilar %}<tr><td><strong>{{ s.egasi_fio }}</strong></td><td><span class="bdg {% if s.talaba %}bb2{% elif s.xodim %}bg3{% else %}bam{% endif %}">{{ s.egasi_tur }}</span></td><td>{{ s.nomi }}</td><td style="font-size:13px;color:var(--mu)">{{ s.yaratilgan|date:"d.m.Y" }}</td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empt"><div class="ei">📭</div><p>Hali sertifikat yo'q</p></div>{% endif %}
+</div>{% endblock %}

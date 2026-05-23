@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}{% block title %}Ro'yxat{% endblock %}{% block bc %}📋 <strong>{{ sarlavha }}</strong>{% endblock %}
+{% block content %}
+<div class="ph"><div><h1>📋 {{ sarlavha }}</h1><p>Sertifikat yuklash uchun shaxsni tanlang</p></div></div>
+<div class="card" style="padding:1rem">
+{% if shaxslar %}
+<div class="tw"><table>
+<thead><tr><th>#</th><th>F.I.O.</th><th>Sertifikat soni</th><th>Kerak</th><th>KPI</th><th>Holat</th><th></th></tr></thead>
+<tbody>{% for s in shaxslar %}
+<tr>
+  <td style="color:var(--mu);font-size:13px">{{ forloop.counter }}</td>
+  <td><strong>{{ s.obj.fio }}</strong></td>
+  <td><span class="bdg bb2">{{ s.soni }} ta</span></td>
+  <td style="color:var(--mu);font-size:13px">{{ s.kerak }} ta</td>
+  <td>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="kbar" style="width:80px"><div class="kfill {% if s.foiz >= 100 %}k-gr{% elif s.foiz >= 50 %}k-am{% else %}k-rd{% endif %}" style="width:{{ s.foiz }}%"></div></div>
+      <span style="font-size:13px;font-weight:600;{% if s.foiz >= 100 %}color:var(--gr){% elif s.foiz >= 50 %}color:var(--am){% else %}color:var(--rd){% endif %}">{{ s.foiz }}%</span>
+    </div>
+  </td>
+  <td>{% if s.foiz >= 100 %}<span class="bdg bg3">✓ Yetarli</span>{% elif s.foiz > 0 %}<span class="bdg bam">Davom etmoqda</span>{% else %}<span class="bdg brd">Boshlanmagan</span>{% endif %}</td>
+  <td><a href="{% url 'sert_yuklash' s.tur s.obj.pk %}" class="btn bb bsm">+ Sertifikat</a></td>
+</tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="empt"><div class="ei">📭</div><p>Ro'yxat bo'sh</p></div>{% endif %}
+</div>{% endblock %}

@@ -1,0 +1,9 @@
+*.pyc
+__pycache__/
+db.sqlite3
+*.xlsx
+*.xls
+*.csv
+staticfiles/
+.env
+*.log
