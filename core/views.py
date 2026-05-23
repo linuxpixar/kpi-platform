@@ -124,7 +124,7 @@ def sert_ochir(request, pk):
 @login_required
 @user_passes_test(is_admin)
 def users_list(request):
-    users = User.objects.filter(is_staff=False).select_related('profile__guruh','profile__bolim','profile__kafedra').order_by('last_name','first_name')
+    users = User.objects.filter(is_staff=False).select_related('profile__bolim','profile__kafedra').prefetch_related('profile__guruhlar').order_by('last_name','first_name')
     return render(request, 'core/users_list.html', {'users': users, 'rol_choices': ROL_CHOICES})
 
 @login_required
