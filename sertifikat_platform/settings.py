@@ -66,3 +66,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/bosh/'
+CSRF_TRUSTED_ORIGINS = ['https://web-production-a0a2e.up.railway.app']
